@@ -12,22 +12,26 @@ RUN DEBIAN_FRONTEND=noninteractive ;\
         bzip2 \
         cron \
         nginx \
+	mariadb-server \
         openssl \
-        php-apc \
-        php5-apcu \
-        php5-cli \
-        php5-curl \
-        php5-fpm \
-        php5-gd \
-        php5-gmp \
-        php5-imagick \
-        php5-intl \
-        php5-ldap \
-        php5-mcrypt \
-        php5-mysqlnd \
-        php5-pgsql \
-        php5-sqlite \
+        php-apcu \
+        php7.0-cli \
+        php7.0-curl \
+        php7.0-fpm \
+        php7.0-gd \
+        php7.0-gmp \
+        php7.0-imagick \
+        php7.0-intl \
+        php7.0-ldap \
+        php7.0-mcrypt \
+        php7.0-mysqlnd \
+        php7.0-pgsql \
+        php7.0-sqlite \
         smbclient \
         sudo \
 	wget
 
+COPY owncloud.asc /usr/local/src/
+COPY runme.sh /usr/local/bin/
+
+CMD /bin/bash /usr/local/bin/runme.sh
