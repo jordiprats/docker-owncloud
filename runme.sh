@@ -74,7 +74,7 @@ domains = $OWNCLOUD_SERVERNAME
 webroot-path = /var/www/owncloud
 EOF
 
-		/opt/letsencrypt-nginx-autorenew/renew.cert.sh /etc/owncloud.conf
+		/bin/bash /opt/letsencrypt-nginx-autorenew/renew.cert.sh /etc/owncloud.conf
 
 	fi
 	
