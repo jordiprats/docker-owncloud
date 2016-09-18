@@ -94,15 +94,15 @@ else
 	setup_ssl
 fi
 
-#initial scan
-
-su www-data -c 'php /var/www/owncloud/console.php files:scan --all'
-
 #aqui daemon
 
 /etc/init.d/php7.0-fpm start
 /etc/init.d/nginx start
 /usr/sbin/cron -f &
+
+#initial scan
+
+su www-data -c 'php /var/www/owncloud/console.php files:scan --all'
 
 while true;
 do
