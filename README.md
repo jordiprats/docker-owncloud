@@ -13,7 +13,7 @@ using:
 Features:
 
 * hardened TLS configuration
-* generates unique Diffie-Hellman parameters (might take a while)
+* **OPTIONALLY** generates unique Diffie-Hellman parameters (OWNCLOOUD_GENERATE_DH - default: true)
 
 ## example build
 
