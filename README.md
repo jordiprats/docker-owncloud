@@ -1,6 +1,19 @@
 # docker-owncloud
 
-owncloud container for docker
+owncloud container for docker based on:
+
+* Ubuntu 16.04
+
+using:
+
+* nginx
+* php-fpm
+* MariaDB
+
+Features:
+
+* hardened TLS configuration
+* generates unique Diffie-Hellman parameters
 
 ## example build
 
@@ -10,7 +23,7 @@ docker build -t eyp/docker .
 
 ## example run
 
-create container for storage
+create container for persistent storage
 
 ```
 docker run --name persistend-owncloud -i -t eyp/owncloud /bin/true

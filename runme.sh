@@ -65,14 +65,18 @@ setup_ssl()
 		openssl dhparam -out /var/www/ssl/dhparam.pem 4096
 	fi
 
-	cat <<EOF > /etc/owncloud.conf
+	if [ ! -e "/etc/letsencrypt/live/${OWNCLOUD_SERVERNAME}/privkey.pem" ];
+	then
+		cat <<EOF > /etc/owncloud.conf
 rsa-key-size = 4096
 email = example@example.com
 domains = $OWNCLOUD_SERVERNAME
 webroot-path = /var/www/owncloud
 EOF
 
-	/opt/letsencrypt-nginx-autorenew/renew.cert.sh /etc/owncloud.conf
+		/opt/letsencrypt-nginx-autorenew/renew.cert.sh /etc/owncloud.conf
+
+	fi
 	
 }
 
