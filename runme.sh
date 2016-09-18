@@ -60,6 +60,16 @@ setup_ssl()
 	then
 		openssl dhparam -out /var/www/ssl/dhparam.pem 4096
 	fi
+
+	cat <<EOF > /etc/owncloud.conf
+rsa-key-size = 4096
+email = example@example.com
+domains = $OWNCLOUD_SERVERNAME
+webroot-path = /var/www/owncloud
+EOF
+
+	/opt/letsencrypt-nginx-autorenew/renew.cert.sh /etc/owncloud.conf
+	
 }
 
 if [ -e /tmp/owncloudinstalled ];
@@ -72,6 +82,7 @@ else
 
 	phpfpm_conf
 	setup_cron
+
 	setup_ssl
 fi
 

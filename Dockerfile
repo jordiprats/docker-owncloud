@@ -5,6 +5,7 @@ MAINTAINER Jordi Prats
 # https://download.owncloud.org/community/owncloud-9.1.0.zip
 ENV OWNCLOUD_VERSION="9.1.0"
 ENV OWNCLOUD_SERVERNAME="localhost"
+ENV OWNCLOUD_SSL_EMAIL="example@example.com"
 
 RUN DEBIAN_FRONTEND=noninteractive ;\
     apt-get update && \
@@ -30,6 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive ;\
         smbclient \
         sudo \
 	git \
+	vim \
 	wget
 
 COPY owncloud.asc /usr/local/src/
@@ -39,3 +41,6 @@ COPY owncloud-nginx-vhost.conf /etc/nginx/conf.d/
 CMD /bin/bash /usr/local/bin/runme.sh
 
 VOLUME ["/var/lib/mysql"]
+
+EXPOSE 443
+EXPOSE 80
