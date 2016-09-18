@@ -6,6 +6,7 @@ MAINTAINER Jordi Prats
 ENV OWNCLOUD_VERSION="9.1.0"
 ENV OWNCLOUD_SERVERNAME="localhost"
 ENV OWNCLOUD_SSL_EMAIL="example@example.com"
+ENV OWNCLOOUD_GENERATE_DH=1
 
 RUN DEBIAN_FRONTEND=noninteractive ;\
     apt-get update && \

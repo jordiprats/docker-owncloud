@@ -62,7 +62,13 @@ setup_ssl()
 	mkdir -p /var/www/ssl
 	if [ ! -e "/var/www/ssl/dhparam.pem" ];
 	then
-		openssl dhparam -out /var/www/ssl/dhparam.pem 4096
+		if [ "$OWNCLOOUD_GENERATE_DH" -eq 1 ];
+		then
+			openssl dhparam -out /var/www/ssl/dhparam.pem 4096
+		else
+			#eliminar dh config nginx
+			sed '/ssl_dhparam/d' -i /etc/nginx/conf.d/owncloud-nginx-vhost.conf
+		fi
 	fi
 
 	if [ ! -e "/etc/letsencrypt/live/${OWNCLOUD_SERVERNAME}/privkey.pem" ];
