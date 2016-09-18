@@ -20,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive ;\
         php7.0-fpm \
         php7.0-gd \
         php7.0-gmp \
-        php7.0-imagick \
+        php-imagick \
         php7.0-intl \
         php7.0-ldap \
         php7.0-mcrypt \
@@ -29,9 +29,13 @@ RUN DEBIAN_FRONTEND=noninteractive ;\
         php7.0-sqlite \
         smbclient \
         sudo \
+	git \
 	wget
 
 COPY owncloud.asc /usr/local/src/
 COPY runme.sh /usr/local/bin/
+COPY owncloud-nginx-vhost.conf /etc/nginx/conf.d/
 
 CMD /bin/bash /usr/local/bin/runme.sh
+
+VOLUME ["/var/lib/mysql"]
