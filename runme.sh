@@ -48,7 +48,11 @@ setup_cron()
 {
 	if [ ! -f "/tmp/cron.setup.ok" ];
 	then
-		echo
+		cat <<EOF >> /var/spool/cron/crontabs/root
+# m   h  dom mon dow   command
+*/15 * * * * sudo -u www-data php -f /var/www/owncloud/cron.php > /dev/null 2>&1
+EOF
+
 		touch /tmp/cron.setup.ok
 	fi
 }
@@ -86,8 +90,17 @@ else
 	setup_ssl
 fi
 
+#initial scan
+
+su www-data -c 'php /var/www/owncloud/console.php files:scan --all'
+
 #aqui daemon
 
 /etc/init.d/php7.0-fpm start
 /etc/init.d/nginx start
-/usr/sbin/cron -n -p
+/usr/sbin/cron -f &
+
+while true;
+do
+	sleep 10m;
+done
