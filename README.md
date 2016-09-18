@@ -13,7 +13,7 @@ using:
 Features:
 
 * hardened TLS configuration
-* generates unique Diffie-Hellman parameters
+* generates unique Diffie-Hellman parameters (might take a while)
 
 ## example build
 
