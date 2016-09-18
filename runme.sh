@@ -44,6 +44,24 @@ phpfpm_conf()
 	fi
 }
 
+setup_cron()
+{
+	if [ ! -f "/tmp/cron.setup.ok" ];
+	then
+		echo
+		touch /tmp/cron.setup.ok
+	fi
+}
+
+setup_ssl()
+{
+	mkdir -p /var/www/ssl
+	if [ ! -e "/var/www/ssl/dhparam.pem" ];
+	then
+		openssl dhparam -out /var/www/ssl/dhparam.pem 4096
+	fi
+}
+
 if [ -e /tmp/owncloudinstalled ];
 then
 	echo "everything, or at least a single file, is in place - looks good :D"
@@ -53,10 +71,12 @@ else
 	install_autorenew_letsencrypt
 
 	phpfpm_conf
+	setup_cron
+	setup_ssl
 fi
 
 #aqui daemon
 
-/usr/sbin/cron -f &
-/etc/init.d/php5-fpm start
+/etc/init.d/php7.0-fpm start
 /etc/init.d/nginx start
+/usr/sbin/cron -n -p
